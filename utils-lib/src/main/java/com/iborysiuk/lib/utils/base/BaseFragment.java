@@ -32,7 +32,7 @@ public abstract class BaseFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View view = inflater.inflate(getLayout(), container, false);
+        View view = inflater.inflate(getLayout(), container, false);
         if (view != null) ButterKnife.bind(this, view);
         return view;
     }
@@ -62,7 +62,7 @@ public abstract class BaseFragment extends Fragment {
         return animation;
     }
 
-    private void initToolbar(@NonNull final View view) {
+    private void initToolbar(@NonNull View view) {
         final Annotation annotation = getClass().getAnnotation(ConfigToolbar.class);
         if (annotation == null) return;
 
