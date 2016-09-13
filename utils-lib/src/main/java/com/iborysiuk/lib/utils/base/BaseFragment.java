@@ -21,8 +21,6 @@ import com.iborysiuk.lib.utils.utils.Navigator;
 
 import java.lang.annotation.Annotation;
 
-import butterknife.ButterKnife;
-
 /**
  * Created by Yuriy Borysiuk on 9/12/2016.
  */
@@ -32,9 +30,7 @@ public abstract class BaseFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(getLayout(), container, false);
-        if (view != null) ButterKnife.bind(this, view);
-        return view;
+        return inflater.inflate(getLayout(), container, false);
     }
 
     @Override
@@ -67,10 +63,9 @@ public abstract class BaseFragment extends Fragment {
         if (annotation == null) return;
 
         final ConfigToolbar config = (ConfigToolbar) annotation;
-        Toolbar toolbar = ButterKnife.findById(view,
-                config.id() != View.NO_ID
-                        ? config.id()
-                        : R.id.toolbar);
+        Toolbar toolbar = (Toolbar) view.findViewById(config.id() != View.NO_ID
+                ? config.id()
+                : R.id.toolbar);
         if (toolbar == null) return;
 
         //setup toolbar configuration

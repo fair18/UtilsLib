@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'android-apt'
 
 android {
     compileSdkVersion rootProject.sdkVersion
@@ -17,11 +16,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:support-annotations:24.2.1'
     compile 'com.android.support:design:24.2.1'
-
-    //Butter knife
-    compile 'com.jakewharton:butterknife:8.4.0'
-    apt 'com.jakewharton:butterknife-compiler:8.4.0'
-
 }
 
 ext {
@@ -37,7 +31,7 @@ ext {
     siteUrl = 'https://github.com/fair18/UtilsLib'
     gitUrl = 'https://github.com/fair18/UtilsLib.git'
 
-    libraryVersion = '0.0.3'
+    libraryVersion = '0.0.5'
 
     developerId = 'fair18  '
     developerName = 'Yuriy Borysiuk'
