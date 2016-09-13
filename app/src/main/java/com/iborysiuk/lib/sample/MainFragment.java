@@ -2,14 +2,14 @@ package com.iborysiuk.lib.sample;
 
 import android.os.Bundle;
 
-import com.iborysiuk.lib.utils.annotations.ConfigLayoutView;
 import com.iborysiuk.lib.utils.annotations.ConfigToolbar;
+import com.iborysiuk.lib.utils.annotations.FragmentView;
 import com.iborysiuk.lib.utils.base.BaseFragment;
 
 /**
  * Created by Yuriy Borysiuk on 9/13/2016.
  */
-@ConfigLayoutView(R.layout.fragment_main)
+@FragmentView(R.layout.fragment_main)
 @ConfigToolbar
 public class MainFragment extends BaseFragment {
 

@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface ConfigLayoutView {
+public @interface FragmentView {
 
     /**
      * @return final value of recourse layout

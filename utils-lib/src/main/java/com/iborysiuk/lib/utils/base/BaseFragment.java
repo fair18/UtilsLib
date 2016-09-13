@@ -15,8 +15,8 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 
 import com.iborysiuk.lib.utils.R;
-import com.iborysiuk.lib.utils.annotations.ConfigLayoutView;
 import com.iborysiuk.lib.utils.annotations.ConfigToolbar;
+import com.iborysiuk.lib.utils.annotations.FragmentView;
 import com.iborysiuk.lib.utils.utils.Navigator;
 
 import java.lang.annotation.Annotation;
@@ -46,9 +46,9 @@ public abstract class BaseFragment extends Fragment {
     @LayoutRes
     private int getLayout() {
         int layout = -1;
-        final Annotation annotation = getClass().getAnnotation(ConfigLayoutView.class);
+        final Annotation annotation = getClass().getAnnotation(FragmentView.class);
         if (annotation != null)
-            layout = ((ConfigLayoutView) annotation).value();
+            layout = ((FragmentView) annotation).value();
 
         if (layout == View.NO_ID)
             throw new Resources.NotFoundException("Layout recourse not found");

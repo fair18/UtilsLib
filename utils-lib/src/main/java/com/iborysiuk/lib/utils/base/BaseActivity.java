@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.iborysiuk.lib.utils.R;
-import com.iborysiuk.lib.utils.annotations.ConfigLayoutView;
+import com.iborysiuk.lib.utils.annotations.ActivityView;
 import com.iborysiuk.lib.utils.utils.Navigator;
 
 import java.lang.annotation.Annotation;
@@ -47,11 +47,11 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private void setContentView() {
         final int defaultLayout = R.layout.activity_fragment_layout;
-        final Annotation annotation = getClass().getAnnotation(ConfigLayoutView.class);
+        final Annotation annotation = getClass().getAnnotation(ActivityView.class);
         if (annotation == null)
             setContentView(defaultLayout);
         else {
-            int layout = ((ConfigLayoutView) annotation).value();
+            int layout = ((ActivityView) annotation).value();
             setContentView(layout != View.NO_ID ? layout : defaultLayout);
         }
     }
