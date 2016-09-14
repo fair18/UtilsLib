@@ -10,6 +10,8 @@ import android.view.animation.AnimationUtils;
 
 import com.iborysiuk.lib.utils.R;
 
+import java.util.List;
+
 
 /**
  * Created by Yuriy Borysiuk on 9/12/2016.
@@ -67,7 +69,10 @@ public class Navigator {
 
     private void setRootFragment(@NonNull Fragment rootFragment) {
         if (getSize() > 0) this.clearHistory();
+        Fragment visibleFragment = getVisibleFragment();
+        if (visibleFragment != null) this.removeFragment(visibleFragment);
         this.replaceFragment(rootFragment);
+
     }
 
     private Fragment getActiveFragment() {
@@ -75,6 +80,17 @@ public class Navigator {
         String tag = mFragmentManager
                 .getBackStackEntryAt(mFragmentManager.getBackStackEntryCount() - 1).getName();
         return mFragmentManager.findFragmentByTag(tag);
+    }
+
+    private Fragment getVisibleFragment() {
+        List<Fragment> fragments = mFragmentManager.getFragments();
+        if (fragments != null) {
+            for (Fragment fragment : fragments) {
+                if (fragment != null && fragment.isVisible())
+                    return fragment;
+            }
+        }
+        return null;
     }
 
     private void goTo(final Fragment fragment) {
@@ -94,13 +110,11 @@ public class Navigator {
         mFragmentManager.executePendingTransactions();
     }
 
-    public void removeFragment(final Fragment fragment) {
+    private void removeFragment(final Fragment fragment) {
         mFragmentManager.beginTransaction()
                 .remove(fragment)
                 .commit();
-        mFragmentManager.popBackStack();
     }
-
 
     private String getName(final Fragment fragment) {
         return fragment.getClass().getSimpleName();

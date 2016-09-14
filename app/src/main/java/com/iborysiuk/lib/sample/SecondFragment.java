@@ -9,7 +9,6 @@ import android.widget.TextView;
 import com.iborysiuk.lib.utils.annotations.ConfigToolbar;
 import com.iborysiuk.lib.utils.annotations.FragmentView;
 import com.iborysiuk.lib.utils.base.BaseFragment;
-import com.iborysiuk.lib.utils.utils.Navigator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,20 +18,20 @@ import butterknife.ButterKnife;
  */
 @FragmentView(R.layout.fragment_main)
 @ConfigToolbar
-public class MainFragment extends BaseFragment {
+public class SecondFragment extends BaseFragment {
 
     @BindView(R.id.textView)
     TextView textView;
 
-    public MainFragment() {
+    public SecondFragment() {
 
     }
 
-    public static MainFragment newInstance() {
+    public static SecondFragment newInstance() {
 
         Bundle args = new Bundle();
 
-        MainFragment fragment = new MainFragment();
+        SecondFragment fragment = new SecondFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -49,9 +48,8 @@ public class MainFragment extends BaseFragment {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                textView.setText("Change me");
-                Navigator.get().initFragment(SecondFragment.newInstance());
+                textView.setText("Hello me");
             }
-        }, 3000);
+        }, 500);
     }
 }
