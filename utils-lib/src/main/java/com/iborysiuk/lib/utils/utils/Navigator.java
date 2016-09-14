@@ -69,8 +69,7 @@ public class Navigator {
 
     private void setRootFragment(@NonNull Fragment rootFragment) {
         if (getSize() > 0) this.clearHistory();
-        Fragment visibleFragment = getVisibleFragment();
-        if (visibleFragment != null) this.removeFragment(visibleFragment);
+        if (mFragmentManager.getFragments() != null) this.cleanFragments();
         this.replaceFragment(rootFragment);
 
     }
@@ -82,15 +81,14 @@ public class Navigator {
         return mFragmentManager.findFragmentByTag(tag);
     }
 
-    private Fragment getVisibleFragment() {
+    private void cleanFragments() {
         List<Fragment> fragments = mFragmentManager.getFragments();
         if (fragments != null) {
             for (Fragment fragment : fragments) {
                 if (fragment != null && fragment.isVisible())
-                    return fragment;
+                    this.removeFragment(fragment);
             }
         }
-        return null;
     }
 
     private void goTo(final Fragment fragment) {
