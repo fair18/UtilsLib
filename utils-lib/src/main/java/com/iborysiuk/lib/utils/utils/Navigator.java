@@ -29,7 +29,7 @@ public class Navigator {
     private Navigator() {
     }
 
-    public static void init(@NonNull FragmentManager manager, @IdRes int defaultContainer) {
+    public synchronized static void init(@NonNull FragmentManager manager, @IdRes int defaultContainer) {
         if (mInstance == null) {
             mInstance = new Navigator();
             mInstance.config(manager, defaultContainer);

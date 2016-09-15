@@ -35,7 +35,7 @@ import static com.iborysiuk.lib.utils.enums.LayoutActivity.TOOLBAR;
 public abstract class BaseActivity extends AppCompatActivity {
 
     @LayoutRes
-    private final int MAIN_LAYOUT_RES;
+    private int MAIN_LAYOUT_RES;
 
     private DrawerLayout mDrawer;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -43,13 +43,14 @@ public abstract class BaseActivity extends AppCompatActivity {
 
 
     public BaseActivity() {
-        MAIN_LAYOUT_RES = getLayout();
-        Navigator.init(getSupportFragmentManager(), R.id.container);
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        MAIN_LAYOUT_RES = getLayout();
         if (DRAWER.layout() == MAIN_LAYOUT_RES) setTheme(R.style.AppTheme_TranslucentStatus);
+        Navigator.init(getSupportFragmentManager(), R.id.container);
+
         super.onCreate(savedInstanceState);
         setContentView(MAIN_LAYOUT_RES != View.NO_ID ? MAIN_LAYOUT_RES : DEFAULT.layout());
         setupToolbarOrNavDrawer(MAIN_LAYOUT_RES);
@@ -61,9 +62,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract Fragment getRootFragment();
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    public void finish() {
         Navigator.remove();
+        super.finish();
     }
 
     @Override
@@ -123,9 +124,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (annotation == null) return navigationView;
 
         final ConfigNavigationDrawer config = (ConfigNavigationDrawer) annotation;
-        navigationView.inflateMenu(config.value() != Menu.NONE ? config.value() : Menu.NONE);
+        if (config.value() != Menu.NONE)
+            navigationView.inflateMenu(config.value());
+
         if (config.headerLayout() != View.NO_ID)
             navigationView.inflateHeaderView(config.headerLayout());
+
         return navigationView;
     }
 
