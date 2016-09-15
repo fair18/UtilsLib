@@ -1,7 +1,6 @@
 package com.iborysiuk.lib.sample;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
@@ -9,7 +8,6 @@ import android.widget.TextView;
 import com.iborysiuk.lib.utils.annotations.ConfigToolbar;
 import com.iborysiuk.lib.utils.annotations.FragmentView;
 import com.iborysiuk.lib.utils.base.BaseFragment;
-import com.iborysiuk.lib.utils.utils.Navigator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,12 +44,5 @@ public class MainFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                textView.setText("Change me");
-                Navigator.get().initFragment(SecondFragment.newInstance());
-            }
-        }, 3000);
     }
 }
