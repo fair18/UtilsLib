@@ -40,6 +40,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private DrawerLayout mDrawer;
     private ActionBarDrawerToggle mDrawerToggle;
     private Toolbar mToolbar;
+    private NavigationView mNavigationView;
 
 
     public BaseActivity() {
@@ -115,22 +116,22 @@ public abstract class BaseActivity extends AppCompatActivity {
         mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = setupDrawerToggle();
         mDrawer.addDrawerListener(mDrawerToggle);
-        setupDrawerContent(getNavigationView());
+        setupDrawerContent(initNavigationView());
     }
 
-    private NavigationView getNavigationView() {
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nvView);
+    private NavigationView initNavigationView() {
+        mNavigationView = (NavigationView) findViewById(R.id.nvView);
         final Annotation annotation = getClass().getAnnotation(ConfigNavigationDrawer.class);
-        if (annotation == null) return navigationView;
+        if (annotation == null) return mNavigationView;
 
         final ConfigNavigationDrawer config = (ConfigNavigationDrawer) annotation;
         if (config.value() != Menu.NONE)
-            navigationView.inflateMenu(config.value());
+            mNavigationView.inflateMenu(config.value());
 
         if (config.headerLayout() != View.NO_ID)
-            navigationView.inflateHeaderView(config.headerLayout());
+            mNavigationView.inflateHeaderView(config.headerLayout());
 
-        return navigationView;
+        return mNavigationView;
     }
 
 
@@ -155,6 +156,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void selectDrawerItem(@NonNull MenuItem menuItem) {
     }
 
+    protected NavigationView getNavigationView() {
+        return mNavigationView;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
