@@ -8,9 +8,11 @@ import android.widget.TextView;
 import com.iborysiuk.lib.utils.annotations.ConfigToolbar;
 import com.iborysiuk.lib.utils.annotations.FragmentView;
 import com.iborysiuk.lib.utils.base.BaseFragment;
+import com.iborysiuk.lib.utils.utils.Navigator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Yuriy Borysiuk on 9/13/2016.
@@ -44,5 +46,10 @@ public class MainFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+    }
+
+    @OnClick(R.id.button)
+    public void actionButton() {
+        Navigator.get().nextFragment(SecondFragment.newInstance());
     }
 }

@@ -2,13 +2,14 @@ package com.iborysiuk.lib.utils.base;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -102,14 +103,10 @@ public abstract class BaseActivity extends AppCompatActivity {
 
         //setup mToolbar configuration
         setSupportActionBar(mToolbar);
-        mToolbar.setTitle(config.title() != View.NO_ID ? config.title() : R.string.empty_title);
-        mToolbar.setNavigationIcon(getNavigationIcon(config.hasArrow()));
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (config.hasArrow()) onBackPressed();
-            }
-        });
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar == null) return;
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
     private void initDrawer() {
@@ -132,12 +129,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             mNavigationView.inflateHeaderView(config.headerLayout());
 
         return mNavigationView;
-    }
-
-
-    @DrawableRes
-    private int getNavigationIcon(boolean hasArrow) {
-        return !hasArrow ? R.drawable.ic_menu : R.drawable.ic_arrow_back;
     }
 
     private void setupDrawerContent(@NonNull NavigationView navigationView) {
@@ -184,5 +175,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private ActionBarDrawerToggle setupDrawerToggle() {
         return new ActionBarDrawerToggle(this, mDrawer, mToolbar, R.string.drawer_open, R.string.drawer_close);
+    }
+
+    public void openDrawer() {
+        if (mDrawer != null) mDrawer.openDrawer(GravityCompat.START);
     }
 }

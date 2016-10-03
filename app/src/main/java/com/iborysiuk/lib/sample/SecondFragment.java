@@ -16,7 +16,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Yuriy Borysiuk on 9/13/2016.
  */
-@FragmentView(R.layout.fragment_main)
+@FragmentView(R.layout.fragment_second)
 @ConfigToolbar(hasArrow = true)
 public class SecondFragment extends BaseFragment {
 
