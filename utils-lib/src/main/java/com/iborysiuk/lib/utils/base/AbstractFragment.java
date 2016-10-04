@@ -57,8 +57,8 @@ public abstract class AbstractFragment extends Fragment {
 
         //setup mToolbar configuration
         mToolbar.setTitle(config.title() != View.NO_ID ? config.title() : R.string.empty_title);
+        mToolbar.getMenu().clear();
         mToolbar.inflateMenu(config.menu() != View.NO_ID ? config.menu() : R.menu.empty_menu);
-
     }
 
     @LayoutRes
@@ -82,6 +82,5 @@ public abstract class AbstractFragment extends Fragment {
 
     protected void addOnMenuItemClickListener(OnMenuItemClickListener listener) {
         if (mToolbar != null) mToolbar.setOnMenuItemClickListener(listener);
-
     }
 }
