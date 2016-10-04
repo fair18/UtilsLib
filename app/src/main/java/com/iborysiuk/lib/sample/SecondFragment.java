@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.iborysiuk.lib.utils.annotations.ConfigToolbar;
 import com.iborysiuk.lib.utils.annotations.FragmentView;
-import com.iborysiuk.lib.utils.base.BaseFragment;
+import com.iborysiuk.lib.utils.base.AbstractFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,8 +17,8 @@ import butterknife.ButterKnife;
  * Created by Yuriy Borysiuk on 9/13/2016.
  */
 @FragmentView(R.layout.fragment_second)
-@ConfigToolbar(hasArrow = true)
-public class SecondFragment extends BaseFragment {
+@ConfigToolbar(title = R.string.title_second_fragment)
+public class SecondFragment extends AbstractFragment {
 
     @BindView(R.id.textView)
     TextView textView;

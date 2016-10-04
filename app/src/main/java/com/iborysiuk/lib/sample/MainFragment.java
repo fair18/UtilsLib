@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.iborysiuk.lib.utils.annotations.ConfigToolbar;
 import com.iborysiuk.lib.utils.annotations.FragmentView;
-import com.iborysiuk.lib.utils.base.BaseFragment;
+import com.iborysiuk.lib.utils.base.AbstractFragment;
 import com.iborysiuk.lib.utils.utils.Navigator;
 
 import butterknife.BindView;
@@ -18,8 +18,8 @@ import butterknife.OnClick;
  * Created by Yuriy Borysiuk on 9/13/2016.
  */
 @FragmentView(R.layout.fragment_main)
-@ConfigToolbar
-public class MainFragment extends BaseFragment {
+@ConfigToolbar(title = R.string.title_main_fragment)
+public class MainFragment extends AbstractFragment {
 
     @BindView(R.id.textView)
     TextView textView;

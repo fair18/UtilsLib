@@ -10,13 +10,13 @@ import android.view.MenuItem;
 import com.iborysiuk.lib.utils.annotations.ActivityView;
 import com.iborysiuk.lib.utils.annotations.ConfigNavigationDrawer;
 import com.iborysiuk.lib.utils.annotations.ConfigToolbar;
-import com.iborysiuk.lib.utils.base.BaseActivity;
+import com.iborysiuk.lib.utils.base.AbstractActivity;
 import com.iborysiuk.lib.utils.utils.Navigator;
 
 @ActivityView(R.layout.activity_fragment_drawer_container)
 @ConfigToolbar
 @ConfigNavigationDrawer(value = R.menu.drav1_menu, headerLayout = R.layout.nav_header)
-public class MainActivity extends BaseActivity {
+public class MainActivity extends AbstractActivity {
 
     @NonNull
     @Override

@@ -31,7 +31,7 @@ ext {
     siteUrl = 'https://github.com/fair18/UtilsLib'
     gitUrl = 'https://github.com/fair18/UtilsLib.git'
 
-    libraryVersion = '0.0.13'
+    libraryVersion = '0.0.14'
 
     developerId = 'fair18  '
     developerName = 'Yuriy Borysiuk'

@@ -1,11 +1,14 @@
 package com.iborysiuk.lib.utils.base;
 
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +26,7 @@ import java.lang.annotation.Annotation;
  * Created by Yuriy Borysiuk on 9/12/2016.
  */
 
-public abstract class BaseFragment extends Fragment {
+public abstract class AbstractFragment extends Fragment {
 
     @Nullable
     @Override
@@ -49,15 +52,6 @@ public abstract class BaseFragment extends Fragment {
 
         //setup mToolbar configuration
         toolbar.setTitle(config.title() != View.NO_ID ? config.title() : R.string.empty_title);
-        final boolean hasArrow = (!Navigator.get().isEmpty()) && config.hasArrow();
-        toolbar.setNavigationIcon(getNavigationIcon(hasArrow));
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (hasArrow) ((BaseActivity) getContext()).onBackPressed();
-                else ((BaseActivity) getContext()).openDrawer();
-            }
-        });
     }
 
     @LayoutRes
@@ -78,10 +72,4 @@ public abstract class BaseFragment extends Fragment {
         if (animation == null) return super.onCreateAnimation(transit, enter, nextAnim);
         return animation;
     }
-
-    @DrawableRes
-    private int getNavigationIcon(boolean hasArrow) {
-        return !hasArrow ? R.drawable.ic_menu : R.drawable.ic_arrow_back;
-    }
-
 }

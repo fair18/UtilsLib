@@ -1,12 +1,18 @@
 package com.iborysiuk.lib.utils.base;
 
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -33,7 +39,7 @@ import static com.iborysiuk.lib.utils.enums.LayoutActivity.TOOLBAR;
  * Created by Yuriy Borysiuk on 9/12/2016.
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class AbstractActivity extends AppCompatActivity {
 
     @LayoutRes
     private int MAIN_LAYOUT_RES;
@@ -44,7 +50,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private NavigationView mNavigationView;
 
 
-    public BaseActivity() {
+    public AbstractActivity() {
     }
 
     @Override
@@ -105,8 +111,27 @@ public abstract class BaseActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar == null) return;
+
+        actionBar.setTitle(null);
+        actionBar.setSubtitle(null);
+
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        Navigator.get().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+                if (mDrawerToggle != null) {
+                    mDrawerToggle.setDrawerIndicatorEnabled(Navigator.get().isEmpty());
+                    mDrawerToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            onBackPressed();
+                        }
+                    });
+                }
+            }
+        });
     }
 
     private void initDrawer() {
@@ -177,7 +202,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         return new ActionBarDrawerToggle(this, mDrawer, mToolbar, R.string.drawer_open, R.string.drawer_close);
     }
 
-    public void openDrawer() {
-        if (mDrawer != null) mDrawer.openDrawer(GravityCompat.START);
+    private Drawable getHomeAsUpIndicator(@DrawableRes int icon) {
+        Drawable drawable = ContextCompat.getDrawable(this, icon);
+        drawable.setColorFilter(ContextCompat.getColor(this, R.color.icons), PorterDuff.Mode.SRC_ATOP);
+        return drawable;
     }
+
 }

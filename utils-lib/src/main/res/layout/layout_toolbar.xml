@@ -14,7 +14,6 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
-            android:theme="@style/AppTheme.PopupOverlay"
             app:layout_collapseMode="pin">
 
         </android.support.v7.widget.Toolbar>

@@ -12,6 +12,8 @@ import com.iborysiuk.lib.utils.R;
 
 import java.util.List;
 
+import static android.support.v4.app.FragmentManager.OnBackStackChangedListener;
+
 
 /**
  * Created by Yuriy Borysiuk on 9/12/2016.
@@ -118,7 +120,7 @@ public class Navigator {
         return fragment.getClass().getSimpleName();
     }
 
-    private int getSize() {
+    public int getSize() {
         return mFragmentManager.getBackStackEntryCount();
     }
 
@@ -148,5 +150,7 @@ public class Navigator {
                 : (enter ? R.anim.slide_right_in : R.anim.slide_right_out));
     }
 
-
+    public void addOnBackStackChangedListener(OnBackStackChangedListener listener) {
+        mFragmentManager.addOnBackStackChangedListener(listener);
+    }
 }

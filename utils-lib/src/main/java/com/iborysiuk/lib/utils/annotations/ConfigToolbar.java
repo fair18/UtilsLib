@@ -2,6 +2,7 @@ package com.iborysiuk.lib.utils.annotations;
 
 import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
+import android.support.annotation.StyleRes;
 import android.view.View;
 
 import java.lang.annotation.ElementType;
@@ -26,9 +27,5 @@ public @interface ConfigToolbar {
      */
     @StringRes int title() default View.NO_ID;
 
-    /**
-     * @return if hasArrow true, then will setup ic_arrow icon.xml otherwise ic_main.xml
-     */
-    boolean hasArrow() default false;
 
 }
