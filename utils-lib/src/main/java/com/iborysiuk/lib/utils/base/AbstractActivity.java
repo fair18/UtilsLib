@@ -202,10 +202,4 @@ public abstract class AbstractActivity extends AppCompatActivity {
         return new ActionBarDrawerToggle(this, mDrawer, mToolbar, R.string.drawer_open, R.string.drawer_close);
     }
 
-    private Drawable getHomeAsUpIndicator(@DrawableRes int icon) {
-        Drawable drawable = ContextCompat.getDrawable(this, icon);
-        drawable.setColorFilter(ContextCompat.getColor(this, R.color.icons), PorterDuff.Mode.SRC_ATOP);
-        return drawable;
-    }
-
 }

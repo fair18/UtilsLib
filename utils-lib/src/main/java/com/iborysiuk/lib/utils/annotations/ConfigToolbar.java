@@ -1,6 +1,7 @@
 package com.iborysiuk.lib.utils.annotations;
 
 import android.support.annotation.IdRes;
+import android.support.annotation.MenuRes;
 import android.support.annotation.StringRes;
 import android.support.annotation.StyleRes;
 import android.view.View;
@@ -27,5 +28,8 @@ public @interface ConfigToolbar {
      */
     @StringRes int title() default View.NO_ID;
 
-
+    /**
+     * @return toolbar menu recourse id
+     */
+    @MenuRes int menu() default View.NO_ID;
 }

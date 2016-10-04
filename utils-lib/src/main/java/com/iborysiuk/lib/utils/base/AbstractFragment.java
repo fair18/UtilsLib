@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -22,11 +23,15 @@ import com.iborysiuk.lib.utils.utils.Navigator;
 
 import java.lang.annotation.Annotation;
 
+import static android.support.v7.widget.Toolbar.*;
+
 /**
  * Created by Yuriy Borysiuk on 9/12/2016.
  */
 
 public abstract class AbstractFragment extends Fragment {
+
+    private Toolbar mToolbar;
 
     @Nullable
     @Override
@@ -45,13 +50,15 @@ public abstract class AbstractFragment extends Fragment {
         if (annotation == null) return;
 
         final ConfigToolbar config = (ConfigToolbar) annotation;
-        Toolbar toolbar = (Toolbar) getActivity().findViewById(config.id() != View.NO_ID
+        mToolbar = (Toolbar) getActivity().findViewById(config.id() != View.NO_ID
                 ? config.id()
                 : R.id.toolbar);
-        if (toolbar == null) return;
+        if (mToolbar == null) return;
 
         //setup mToolbar configuration
-        toolbar.setTitle(config.title() != View.NO_ID ? config.title() : R.string.empty_title);
+        mToolbar.setTitle(config.title() != View.NO_ID ? config.title() : R.string.empty_title);
+        mToolbar.inflateMenu(config.menu() != View.NO_ID ? config.menu() : R.menu.empty_menu);
+
     }
 
     @LayoutRes
@@ -71,5 +78,10 @@ public abstract class AbstractFragment extends Fragment {
         final Animation animation = Navigator.get().getFragmentAnimation(getContext(), enter);
         if (animation == null) return super.onCreateAnimation(transit, enter, nextAnim);
         return animation;
+    }
+
+    protected void addOnMenuItemClickListener(OnMenuItemClickListener listener) {
+        if (mToolbar != null) mToolbar.setOnMenuItemClickListener(listener);
+
     }
 }
